@@ -26,5 +26,8 @@
   "bugs": {
     "url": "https://github.com/FonzMP/trailsetmc-node/issues"
   },
-  "homepage": "https://github.com/FonzMP/trailsetmc-node#readme"
+  "homepage": "https://github.com/FonzMP/trailsetmc-node#readme",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
 }

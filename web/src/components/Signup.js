@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class Signup extends Component {
     render() {
         return (
-            <div className="core-container">
+            <div className="container">
                 <h1>Signup</h1>
                 <p>Please fill out the information below: </p>
                 <form>

@@ -1,4 +1,5 @@
 import { userConstants } from "../_constants/user.constants";
+import { errorConstants } from "../_constants/error.constants";
 
 const url = process.env.REACT_APP_SERVER_URL;
 
@@ -10,7 +11,7 @@ function signupUser(user) {
   return dispatch => {
     dispatch({ type: userConstants.AWAITING_SIGNUP });
     let body = JSON.stringify({
-      user: { user }
+      user
     });
     return fetch(`${url}/signup`, {
       method: "POST",
@@ -18,8 +19,20 @@ function signupUser(user) {
         "Content-type": "application/json"
       },
       body: body
-    }).then(response => {
-      console.log(response);
-    });
+    })
+      .then(response => {
+        return response.json();
+      })
+      .then(user => {
+        if (user.error) {
+          dispatch({
+            type: errorConstants.NEW_ERROR,
+            payload: user.error.message
+          });
+        } else {
+          console.log(user);
+          dispatch({ type: userConstants.USER_SIGNED_UP, payload: user });
+        }
+      });
   };
 }

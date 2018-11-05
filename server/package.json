@@ -1,0 +1,30 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "Server for the trailsetmc application",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FonzMP/trailsetmc-node.git"
+  },
+  "keywords": [
+    "trail",
+    "set",
+    "trailset",
+    "mc",
+    "motorcycle",
+    "trailsetmc",
+    "riding",
+    "tracking",
+    "safety"
+  ],
+  "author": "Alex Wilson",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/FonzMP/trailsetmc-node/issues"
+  },
+  "homepage": "https://github.com/FonzMP/trailsetmc-node#readme"
+}

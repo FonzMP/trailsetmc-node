@@ -54,6 +54,14 @@ class Signup extends Component {
   };
 
   render() {
+    let isEnabled =
+      this.state.name.length > 0 &&
+      this.state.email.length > 0 &&
+      this.state.telephone.length > 0 &&
+      this.state.username.length > 0 &&
+      this.state.password.length > 0 &&
+      this.state.email.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
+
     return (
       <div className="modal-backing">
         <div className="modal" ref={node => (this.node = node)}>
@@ -100,7 +108,9 @@ class Signup extends Component {
               value={this.state.password}
               placeholder="password"
             />
-            <button>Submit</button>
+            <button type="submit" disabled={!isEnabled}>
+              Signup
+            </button>
             <button onClick={this.closeSignup}>Close</button>
           </form>
         </div>

@@ -49,6 +49,8 @@ class Login extends Component {
   };
 
   render() {
+    let isEnabled =
+      this.state.username.length > 0 && this.state.password.length > 0;
     return (
       <div className="modal-backing">
         <div className="modal" ref={node => (this.node = node)}>
@@ -71,7 +73,9 @@ class Login extends Component {
               value={this.state.password}
               placeholder="password"
             />
-            <button>Submit</button>
+            <button type="submit" disabled={!isEnabled}>
+              Login
+            </button>
             <button onClick={this.closeLogin}>Close</button>
           </form>
         </div>

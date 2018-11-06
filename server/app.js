@@ -72,6 +72,16 @@ app.post("/login", function(req, res) {
   });
 });
 
+app.get("/user/:id", function(req, res) {
+  User.findById(req.params.id, function(err, user) {
+    if (!user) {
+      res.json({ error: "User not found" });
+    } else {
+      res.json(user);
+    }
+  });
+});
+
 app.listen(3001, () => {
   console.log("server has started");
 });

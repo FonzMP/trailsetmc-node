@@ -12,6 +12,7 @@ import Home from "./components/Home";
 import ErrorModal from "./components/Modals/errorModal";
 
 import { errorServices } from "./_services/errorServices";
+import { userServices } from "./_services/userServices";
 
 class App extends Component {
   constructor() {
@@ -20,6 +21,14 @@ class App extends Component {
       displaySignup: false,
       displayLogin: false
     };
+  }
+
+  componentDidMount() {
+    const id = localStorage.getItem("userId");
+    console.log(id);
+    if (id) {
+      this.props.dispatch(userServices.setUser(id));
+    }
   }
   clearError = () => {
     this.props.dispatch(errorServices.clearError());
@@ -65,7 +74,8 @@ class App extends Component {
 
 function mapStateToProps(state) {
   return {
-    error: state.error.error
+    error: state.error.error,
+    user: state.user.user
   };
 }
 

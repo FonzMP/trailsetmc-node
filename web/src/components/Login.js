@@ -33,7 +33,7 @@ class Login extends Component {
 
   formSubmit = e => {
     e.preventDefault();
-    this.props.dispatch(userServices.signupUser(this.state));
+    this.props.dispatch(userServices.loginUser(this.state));
   };
 
   handleOnChange = e => {

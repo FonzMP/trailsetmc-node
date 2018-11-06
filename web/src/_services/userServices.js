@@ -5,7 +5,9 @@ const url = process.env.REACT_APP_SERVER_URL;
 
 export const userServices = {
   signupUser,
-  loginUser
+  loginUser,
+  setUser,
+  logoutUser
 };
 
 function signupUser(user) {
@@ -31,7 +33,7 @@ function signupUser(user) {
             payload: user.error.message
           });
         } else {
-          localStorage.setItem("userId", user.id);
+          localStorage.setItem("userId", user._id);
           dispatch({ type: userConstants.USER_SIGNED_UP, payload: user });
         }
       });
@@ -62,9 +64,29 @@ function loginUser(user) {
             payload: user.error
           });
         } else {
-          localStorage.setItem("userId", user.id);
+          localStorage.setItem("userId", user._id);
           dispatch({ type: userConstants.USER_LOGGED_IN, payload: user });
         }
       });
+  };
+}
+
+function setUser(id) {
+  return dispatch => {
+    dispatch({ type: userConstants.AWAITING_LOGIN });
+    return fetch(`${url}/user/${id}`)
+      .then(response => {
+        return response.json();
+      })
+      .then(user => {
+        dispatch({ type: userConstants.USER_LOGGED_IN, payload: user });
+      });
+  };
+}
+
+function logoutUser() {
+  localStorage.removeItem("userId");
+  return dispatch => {
+    dispatch({ type: userConstants.LOGOUT_USER });
   };
 }

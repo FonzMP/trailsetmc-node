@@ -13,6 +13,8 @@ export default function userReducer(
       return { ...state };
     case userConstants.USER_LOGGED_IN:
       return { ...state, user: action.payload };
+    case userConstants.LOGOUT_USER:
+      return { ...state, user: {} };
 
     default:
       return state;

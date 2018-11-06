@@ -1,4 +1,7 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+
+import { userServices } from "../../_services/userServices";
 
 class UserNavigation extends Component {
   closeSignup = () => {
@@ -6,6 +9,10 @@ class UserNavigation extends Component {
   };
   closeLogin = () => {
     this.props.closeLogin();
+  };
+
+  logout = () => {
+    this.props.dispatch(userServices.logoutUser());
   };
   render() {
     return (
@@ -16,9 +23,16 @@ class UserNavigation extends Component {
         <button className="nav-link" onClick={this.closeLogin}>
           Login
         </button>
+        <button className="nav-link" onClick={this.logout}>
+          Logout
+        </button>
       </div>
     );
   }
 }
 
-export default UserNavigation;
+function mapStateToProps(state) {
+  return {};
+}
+
+export default connect(mapStateToProps)(UserNavigation);

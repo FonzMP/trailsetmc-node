@@ -26,7 +26,6 @@ class Signup extends Component {
     if (this.node.contains(e.target)) {
       return;
     }
-
     this.closeSignup();
   };
 
@@ -37,6 +36,14 @@ class Signup extends Component {
   formSubmit = e => {
     e.preventDefault();
     this.props.dispatch(userServices.signupUser(this.state));
+    this.setState({
+      name: "",
+      email: "",
+      telephone: "",
+      username: "",
+      password: ""
+    });
+    this.props.closeSignup();
   };
 
   handleOnChange = e => {

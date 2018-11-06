@@ -34,6 +34,11 @@ class Login extends Component {
   formSubmit = e => {
     e.preventDefault();
     this.props.dispatch(userServices.loginUser(this.state));
+    this.setState({
+      username: "",
+      password: ""
+    });
+    this.props.closeLogin();
   };
 
   handleOnChange = e => {

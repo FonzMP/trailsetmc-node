@@ -31,6 +31,7 @@ function signupUser(user) {
             payload: user.error.message
           });
         } else {
+          localStorage.setItem("userId", user.id);
           dispatch({ type: userConstants.USER_SIGNED_UP, payload: user });
         }
       });
@@ -54,12 +55,14 @@ function loginUser(user) {
         return response.json();
       })
       .then(user => {
+        console.log(user);
         if (user.error) {
           dispatch({
             type: errorConstants.NEW_ERROR,
-            payload: user.error.message
+            payload: user.error
           });
         } else {
+          localStorage.setItem("userId", user.id);
           dispatch({ type: userConstants.USER_LOGGED_IN, payload: user });
         }
       });

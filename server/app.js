@@ -4,6 +4,8 @@ const bodyParser = require("body-parser");
 require("dotenv").config();
 const app = express();
 var cors = require("cors");
+var bcrypt = require("bcrypt");
+const saltRounds = 10;
 
 app.use(cors());
 
@@ -32,11 +34,40 @@ app.get("/", function(req, res) {
 });
 
 app.post("/signup", function(req, res) {
-  User.create(req.body.user, function(err, user) {
-    if (err) {
-      res.json({ error: err });
+  bcrypt.hash(req.body.user.password, saltRounds, function(err, hash) {
+    const user = {
+      name: req.body.user.name,
+      email: req.body.user.email,
+      telephone: req.body.user.telephone,
+      username: req.body.user.username,
+      password: hash
+    };
+    User.create(user, function(err, user) {
+      if (err) {
+        res.json({ error: err });
+      } else {
+        res.json(user);
+      }
+    });
+  });
+});
+
+app.post("/login", function(req, res) {
+  console.log(req.body.user);
+  User.findOne({ username: req.body.user.username }).then(function(user) {
+    if (!user) {
+      res.json({ error: "Sorry, we couldn't find a user with that username" });
     } else {
-      res.json(user);
+      bcrypt.compare(req.body.user.password, user.password, function(
+        err,
+        result
+      ) {
+        if (result == true) {
+          res.json(user);
+        } else {
+          res.send({ error: "That password seems to be incorrect" });
+        }
+      });
     }
   });
 });

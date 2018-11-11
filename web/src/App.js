@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Switch } from "react-router";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { connect } from "react-redux";
 
@@ -10,6 +11,7 @@ import Signup from "./components/Signup";
 import Login from "./components/Login";
 import Home from "./components/Home";
 import ErrorModal from "./components/Modals/errorModal";
+import UserPage from "./components/User/UserPage";
 
 import { errorServices } from "./_services/errorServices";
 import { userServices } from "./_services/userServices";
@@ -62,9 +64,10 @@ class App extends Component {
             closeSignup={this.displaySignup}
             closeLogin={this.displayLogin}
           />
-          <div>
+          <Switch>
             <Route component={Home} exact path="/" />
-          </div>
+            <Route component={UserPage} exact path="/user" />
+          </Switch>
         </div>
       </Router>
     );

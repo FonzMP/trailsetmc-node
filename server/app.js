@@ -53,8 +53,9 @@ app.post("/signup", function(req, res) {
 });
 
 app.post("/login", function(req, res) {
-  console.log(req.body.user);
-  User.findOne({ username: req.body.user.username }).then(function(user) {
+  User.findOne({
+    username: { $regex: new RegExp(req.body.user.username, "i") }
+  }).then(function(user) {
     if (!user) {
       res.json({ error: "Sorry, we couldn't find a user with that username" });
     } else {

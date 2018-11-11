@@ -25,7 +25,6 @@ class App extends Component {
 
   componentDidMount() {
     const id = localStorage.getItem("userId");
-    console.log(id);
     if (id) {
       this.props.dispatch(userServices.setUser(id));
     }

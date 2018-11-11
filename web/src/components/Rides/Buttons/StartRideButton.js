@@ -27,6 +27,10 @@ class StartRideButton extends Component {
     });
   };
 
+  componentWillUnmount() {
+    clearInterval(this.intervalId);
+  }
+
   render() {
     console.log(this.state);
     return (

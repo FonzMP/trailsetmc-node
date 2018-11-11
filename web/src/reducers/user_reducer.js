@@ -12,9 +12,9 @@ export default function userReducer(
     case userConstants.AWAITING_LOGIN:
       return { ...state };
     case userConstants.USER_LOGGED_IN:
-      return { ...state, user: action.payload };
+      return { loggedIn: true, user: action.payload };
     case userConstants.LOGOUT_USER:
-      return { ...state, user: {} };
+      return { loggedIn: false, user: {} };
 
     default:
       return state;

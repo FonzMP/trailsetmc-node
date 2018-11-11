@@ -17,22 +17,29 @@ class UserNavigation extends Component {
   render() {
     return (
       <div className="navigation user-navigation">
-        <button className="nav-link" onClick={this.closeSignup}>
-          Signup
-        </button>
-        <button className="nav-link" onClick={this.closeLogin}>
-          Login
-        </button>
-        <button className="nav-link" onClick={this.logout}>
-          Logout
-        </button>
+        {!this.props.loggedIn ? (
+          <div>
+            <button className="nav-link" onClick={this.closeSignup}>
+              Signup
+            </button>
+            <button className="nav-link" onClick={this.closeLogin}>
+              Login
+            </button>
+          </div>
+        ) : (
+          <button className="nav-link" onClick={this.logout}>
+            Logout
+          </button>
+        )}
       </div>
     );
   }
 }
 
 function mapStateToProps(state) {
-  return {};
+  return {
+    loggedIn: state.user.loggedIn
+  };
 }
 
 export default connect(mapStateToProps)(UserNavigation);

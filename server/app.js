@@ -4,7 +4,7 @@ const bodyParser = require("body-parser");
 require("dotenv").config();
 const app = express();
 var cors = require("cors");
-var bcrypt = require("bcrypt");
+var bcrypt = require("bcryptjs");
 const saltRounds = 10;
 
 app.use(cors());
@@ -13,12 +13,9 @@ const User = require("./models/user");
 
 const mLab = `mongodb://${process.env.DBUSER}:${
   process.env.DBPASSWORD
-}@ds151863.mlab.com:51863/trailsetmcnode`;
+}@ds151863.mlab.com:51863/${process.env.DBNAME}`;
 
-mongoose.connect(
-  mLab,
-  { useNewUrlParser: true }
-);
+mongoose.connect(mLab, { useNewUrlParser: true });
 
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error:"));
@@ -85,4 +82,9 @@ app.get("/user/:id", function(req, res) {
 
 app.listen(3001, () => {
   console.log("server has started");
+  console.log(
+    `${process.env.DBUSER}:${process.env.DBPASSWORD}@ds151863.mlab.com:51863/${
+      process.env.DBNAME
+    }`
+  );
 });
